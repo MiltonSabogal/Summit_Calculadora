@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Summit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <div class="app-container">
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="img/logosimmit 1.png" alt="Logo Summit">
+                <h2>Calculadora Summit</h2>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#" class="active"><i class="fas fa-calculator"></i> Calculadora</a></li>
+                <li><a href="#"><i class="fas fa-box-open"></i> Productos</a></li>
+                <li><a href="#"><i class="fas fa-history"></i> Historial</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Configuración</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> Ayuda</a></li>
+            </ul>
+        </div>
+
+        <div class="main-content">
+            <div class="section-title">
+                <i class="fas fa-calculator"></i>
+                <h1>Calculadora de Venta</h1>
+            </div>
+
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="busqueda" class="search-box" placeholder="Buscar por nombre o código...">
+                <div id="sugerencias" class="suggestions-box"></div>
+            </div>
+
+            <div class="selected-products-container">
+                <div class="selected-header">
+                    <h2>Productos seleccionados:</h2>
+                    <button class="clear-button" onclick="limpiarSeleccionados()">
+                        <i class="fas fa-trash-alt"></i> Limpiar todo
+                    </button>
+                </div>
+                <ul id="seleccionados" class="selected-list"></ul>
+                <div class="selected-total">
+                    Total seleccionado: $<span id="total-seleccionado">0</span> COP
+                </div>
+            </div>
+
+            <div class="calculator-form">
+                <h3><i class="fas fa-sliders-h"></i> Parámetros de cálculo</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="deposito">Depósito pagado hoy</label>
+                        <input type="number" id="deposito" class="form-control" value="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="tasa_ea">Tasa EA (%)</label>
+                        <input type="number" id="tasa_ea" class="form-control" value="25.34" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="tasa_mv">Tasa MV (%)</label>
+                        <input type="number" id="tasa_mv" class="form-control" value="1.90" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="cuotas">Cuotas</label>
+                        <input type="number" id="cuotas" min="1" max="24" value="18" onchange="calcular()">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button class="btn btn-primary" onclick="calcular()">
+                        <i class="fas fa-calculator"></i> Calcular
+                    </button>
+                    <button class="btn btn-secondary" onclick="resetearCalculadora()">
+                        <i class="fas fa-redo"></i> Resetear
+                    </button>
+                </div>
+            </div>
+
+            <div id="resultado" class="result-container">
+                <div class="result-header">
+                    <h3><i class="fas fa-chart-bar"></i> Resultados de la simulación</h3>
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Exportar
+                    </button>
+                </div>
+                <div class="result-grid">
+                    <div class="result-card">
+                        <div class="result-title">Precio sin IVA</div>
+                        <div class="result-value" id="precio-sin-iva">$0 COP</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-title">IVA (19%)</div>
+                        <div class="result-value" id="iva">$0 COP</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-title">Precio total</div>
+                        <div class="result-value" id="precio-total">$0 COP</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-title">Saldo a financiar</div>
+                        <div class="result-value" id="saldo-financiar">$0 COP</div>
+                    </div>
+                    <div class="result-card">
+                        <div class="result-title">Pago mensual</div>
+                        <div class="result-value" id="pago-mensual">$0 COP</div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Distribución de pagos</div>
+                    <div class="chart-wrapper">
+                        <div class="chart" id="payment-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="productos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
