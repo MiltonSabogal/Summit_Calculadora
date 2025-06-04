@@ -7,7 +7,7 @@ document.getElementById('mobileMenuBtn').addEventListener('click', function() {
     this.querySelector('i').classList.toggle('fa-times');
 });
 
-// Event listener para búsqueda (agregado)
+// Event listener para búsqueda
 document.getElementById("busqueda").addEventListener("input", filtrarProductos);
 
 function filtrarProductos() {
@@ -135,12 +135,12 @@ function calcular() {
     let cuotasInput = parseInt(document.getElementById("cuotas").value || 18);
 
     let cuotas = Math.min(cuotasInput, 24);
-            if (cuotasInput > 24) {
-                alert("El número máximo de cuotas es 24.");
-                document.getElementById("cuotas").value = "24";
-            }
-            
-
+    if (cuotasInput > 24) {
+        alert("El número máximo de cuotas es 24.");
+        document.getElementById("cuotas").value = "24";
+        cuotas = 24;
+    }
+    
     let pagoMensual = 0;
 
     // Cálculo corregido de cuotas
@@ -149,7 +149,6 @@ function calcular() {
             pagoMensual = saldoFinanciar / cuotas;
         } else {
             const i = tasaMV;
-            // Fórmula corregida para cálculo financiero
             pagoMensual = saldoFinanciar * (i * Math.pow(1 + i, cuotas)) / (Math.pow(1 + i, cuotas) - 1);
         }
     }
@@ -184,9 +183,9 @@ function actualizarGrafico(cuotas, pagoMensual, saldoFinanciar) {
         bar.className = "chart-bar";
         bar.style.height = `${barHeight}px`;
         bar.innerHTML = `
-        <div class="chart-bar-value">$${Math.round(v.valor).toLocaleString('es-CO', {maximumFractionDigits: 0})}</div>
-        <div class="chart-bar-label">${v.mes}</div>
-    `;
+            <div class="chart-bar-value">$${Math.round(v.valor).toLocaleString('es-CO', {maximumFractionDigits: 0})}</div>
+            <div class="chart-bar-label">${v.mes}</div>
+        `;
         chart.appendChild(bar);
     });
 }
