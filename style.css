@@ -55,10 +55,10 @@ body {
 }
 
 .sidebar-header img {
-    max-width: 100%; /* Ajusta el ancho máximo al contenedor */
-    height: auto; /* Mantiene la proporción */
-    margin: 0 auto 15px; /* Centra la imagen */
-    display: block; /* Asegura el comportamiento de bloque */
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 15px;
+    display: block;
     transition: transform 0.3s ease;
 }
 
@@ -496,22 +496,23 @@ body {
 
 .chart-wrapper {
     overflow-x: auto;
-    padding-bottom: 30px; /* Espacio para etiquetas */
-    margin: 0 -15px;
-    padding: 0 15px;
+    padding-bottom: 30px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .chart {
-    min-width: 600px; /* Ancho mínimo para mantener estructura */
+    min-width: 100%;
     height: 200px;
     display: flex;
     align-items: flex-end;
     justify-content: space-around;
     padding: 0 10px;
+    gap: 15px;
 }
 
 .chart-bar {
-    width: 40px;
+    min-width: 50px;
+    flex: 1;
     background: var(--secondary);
     border-radius: 5px 5px 0 0;
     position: relative;
@@ -555,6 +556,7 @@ body {
     box-shadow: var(--shadow);
 }
 
+/* Mejoras para móviles */
 @media (max-width: 992px) {
     .app-container {
         flex-direction: column;
@@ -620,17 +622,36 @@ body {
         align-items: flex-start;
     }
     
-    /* Ajuste para gráfico en móviles */
+    /* Mejoras específicas para el gráfico en móviles */
+    .chart-container {
+        padding: 15px;
+    }
+    
     .chart {
         min-width: 100%;
+        height: 180px;
+        gap: 10px;
+        padding: 0;
     }
     
     .chart-bar {
-        width: 30px;
+        min-width: 35px;
+    }
+    
+    .chart-bar-label {
+        font-size: 10px;
+        bottom: -22px;
+        white-space: nowrap;
+    }
+    
+    .chart-bar-value {
+        font-size: 10px;
+        top: -22px;
+        white-space: nowrap;
     }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 480px) {
     body {
         padding: 10px;
     }
@@ -659,114 +680,24 @@ body {
     .sidebar-header img {
         max-width: 150px;
     }
-}
-
-.connection-status {
-    position: fixed;
-    bottom: 10px;
-    right: 10px;
-    padding: 5px 10px;
-    border-radius: 4px;
-    font-size: 0.8em;
-    z-index: 1000;
-}
-
-.online {
-    background-color: #4caf50;
-    color: white;
-}
-
-.offline {
-    background-color: #f44336;
-    color: white;
-}
-
-/* Estilos para el mensaje de pago */
-.mensaje-pago {
-    text-align: center;
-    padding: 20px;
-    color: white;
-}
-
-.mensaje-pago h3 {
-    color: #ffcc00;
-    margin-top: 0;
-}
-
-.mensaje-pago ul {
-    text-align: left;
-    margin: 20px auto;
-    max-width: 300px;
-}
-
-.boton-whatsapp {
-    display: inline-block;
-    background-color: #25D366;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 15px;
-    transition: all 0.3s;
-}
-
-.boton-whatsapp:hover {
-    background-color: #128C7E;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Spinner para carga */
-.spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #ffcc00;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    animation: spin 1s linear infinite;
-    margin: 0 auto;
-    display: none;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-/* En style.css, agrega estos estilos */
-@media (max-width: 768px) {
-    .chart-wrapper {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 20px;
-    }
     
+    /* Más ajustes para el gráfico en pantallas muy pequeñas */
     .chart {
-        min-width: 600px; /* Mantiene un ancho mínimo para evitar amontonamiento */
-        gap: 8px; /* Reduce espacio entre barras */
+        height: 160px;
+        gap: 8px;
     }
     
     .chart-bar {
-        width: 30px; /* Barras más delgadas */
+        min-width: 30px;
     }
     
     .chart-bar-label {
-        font-size: 10px; /* Texto más pequeño */
-        bottom: -22px;
+        font-size: 9px;
+        bottom: -20px;
     }
     
     .chart-bar-value {
-        font-size: 10px; /* Texto más pequeño */
-        top: -22px;
-    }
-}
-
-@media (max-width: 480px) {
-    .chart {
-        min-width: 500px;
-        gap: 6px;
-    }
-    
-    .chart-bar {
-        width: 25px;
+        font-size: 9px;
+        top: -20px;
     }
 }
